@@ -100,6 +100,37 @@ Return value may either be one of the following:
         render :json => { :status => @host.host_status }.to_json if @host
       end
 
+      api :POST, "/hosts/:id/interfaces", "Add new interface"
+      param :id, :identifier_dottable, :required => true
+      param :interface, Hash, :required => true do
+        param :type, String
+        param :mac, String
+        param :name, String
+        param :domain_id, Integer
+        param :subnet_id, Integer
+        param :ip, String
+      end
+
+      def interfaces
+        @host = Host.find(params[:id])
+        data = {:interfaces_attributes => {
+          "new_" + Time.now.to_i => {
+            :_destroy => false,
+            :type => params[:interface][:type],
+            :mac => params[:interface][:mac],
+            :name => params[:interface][:name],
+            :domain_id => params[:interface][:domain_id],
+            :subnet_id => params[:interface][:subnet_id],
+            :ip => params[:interface][:ip],
+            :provider => "IPMI"
+          }
+        }}
+
+        @host.update_attributes(data)
+
+        render :json => { :status => @host.save }.to_json
+      end
+
       private
 
       # this is required for template generation (such as pxelinux) which is not done via a web request
