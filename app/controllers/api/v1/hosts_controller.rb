@@ -112,9 +112,9 @@ Return value may either be one of the following:
       end
 
       def interfaces
-        @host = Host.find(params[:id])
+        @host = Host.find_by_name(params[:id])
         data = {:interfaces_attributes => {
-          "new_" + Time.now.to_i => {
+          "new_" + Time.now.to_i.to_s => {
             :_destroy => false,
             :type => params[:interface][:type],
             :mac => params[:interface][:mac],
