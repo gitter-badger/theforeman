@@ -108,11 +108,11 @@ Return value may either be one of the following:
         param :name, String
         param :domain_id, Integer
         param :subnet_id, Integer
-        param :ip, String
       end
 
       def interfaces
         @host = Host.find_by_name(params[:id])
+        subnet = Subnet.find(params[:interface][:subnet_id])
         data = {:interfaces_attributes => {
           "new_" + Time.now.to_i.to_s => {
             :_destroy => false,
@@ -121,7 +121,7 @@ Return value may either be one of the following:
             :name => params[:interface][:name],
             :domain_id => params[:interface][:domain_id],
             :subnet_id => params[:interface][:subnet_id],
-            :ip => params[:interface][:ip],
+            :ip => subnet.unused_ip(params[:mac]),
             :provider => "IPMI"
           }
         }}

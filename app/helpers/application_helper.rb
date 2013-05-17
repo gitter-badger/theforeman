@@ -54,8 +54,8 @@ module ApplicationHelper
   end
 
   def link_to_remove_puppetclass klass, host
-    options = klass.name.size > 28 ? {:'data-original-title'=>klass.name, :rel=>'twipsy'} : {}
-    content_tag(:span, truncate(klass.name, :length => 28), options).html_safe +
+    options = klass.name.size > 65 ? {:'data-original-title'=>klass.name, :rel=>'twipsy'} : {}
+    content_tag(:span, truncate(klass.name, :length => 65), options).html_safe +
     link_to_function("","remove_puppet_class(this)", :'data-class-id'=>klass.id,
                      :'data-original-title'=>"Click to remove #{klass}", :rel=>'twipsy',
                      :'data-url' => parameters_puppetclass_path( :id => klass.id),
@@ -64,8 +64,8 @@ module ApplicationHelper
   end
 
   def link_to_add_puppetclass klass, host, type
-    options = klass.name.size > 28 ? {:'data-original-title'=>klass.name, :rel=>'twipsy'} : {}
-    content_tag(:span, truncate(klass.name, :length => 28), options).html_safe +
+    options = klass.name.size > 65 ? {:'data-original-title'=>klass.name, :rel=>'twipsy'} : {}
+    content_tag(:span, truncate(klass.name, :length => 65), options).html_safe +
     link_to_function("", "add_puppet_class(this)",
                        :'data-class-id' => klass.id, 'data-type' => type,
                        :'data-url' => parameters_puppetclass_path( :id => klass.id),
