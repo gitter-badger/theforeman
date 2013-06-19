@@ -198,6 +198,15 @@ module HostsHelper
       end
     end
     fields += [["Certificate Name", host.certname]] if Setting[:use_uuid_for_certificates]
+    my_facts = host.facts_hash
+    if my_facts['is_kvm_hypervisor'] == 'true'
+        fields += [["CPUs assigned", my_facts['kvm_cpu_assigned'] + ' / ' + my_facts['processorcount']]]
+        fields += [["Memory assigned", my_facts['kvm_memory_assigned'] + ' / ' + my_facts['memorysize']]]
+    end
+    if my_facts['is_virtual'] == 'true'
+        fields += [["CPUs", my_facts['processorcount']]]
+        fields += [["Memory", my_facts['memorysize']]]
+    end
     fields
   end
 
