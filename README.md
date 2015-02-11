@@ -15,3 +15,6 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+
+
+[![Join the chat at https://gitter.im/rebuy-de/theforeman](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/rebuy-de/theforeman?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
